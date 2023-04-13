@@ -1,4 +1,7 @@
 from langchain import PromptTemplate, OpenAI, LLMChain
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 template = """
 You describe an image for a text2image AI.
@@ -17,8 +20,5 @@ prompt = PromptTemplate(
 
 chain = LLMChain(llm=OpenAI(temperature=0.5), prompt=prompt)
 
-question="Cookie monster finds a treasure chest"
-
-print(chain.predict(question=question))
-
-
+response=chain.predict(question="Cookie monster finds a treasure chest")
+print(response)
