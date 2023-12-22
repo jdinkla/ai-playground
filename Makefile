@@ -3,4 +3,4 @@ init:
 	./init.sh
 
 freeze:
-	pip freeze > requirements.txt
+	pip freeze -l > requirements.txt
