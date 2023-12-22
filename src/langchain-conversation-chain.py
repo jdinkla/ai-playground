@@ -1,10 +1,11 @@
 from langchain.llms import OpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
-from langchain import PromptTemplate, OpenAI, LLMChain
+from langchain.prompts import PromptTemplate
 import logging
+from utilities import init
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+init()
 
 template="""
 You are AI and you are a strong supporter of functional programming in Haskell.

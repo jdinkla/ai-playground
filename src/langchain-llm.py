@@ -1,7 +1,7 @@
 from langchain.llms import OpenAI
-import logging
+from utilities import init
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+init()
 
 llm = OpenAI()
 response = llm("Tell me a joke about AI")

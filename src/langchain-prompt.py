@@ -1,11 +1,13 @@
-from langchain import PromptTemplate, OpenAI, LLMChain
-import logging
+from langchain.prompts import PromptTemplate
+from langchain.llms import OpenAI
+from langchain.chains import LLMChain
+from utilities import init
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+init()
 
 template = """
 You describe an image for a text2image AI.
-It Is important to describe the contents with keywords that can be recognised by the AI.
+Describe the contents with keywords that can be recognised by the AI.
 Use adjectives to describe details. 
 Limit your answer to at most 75 words.
 Do not use the following words: [knob].
