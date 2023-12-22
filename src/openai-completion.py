@@ -1,9 +1,11 @@
-from openai import Completion
+from openai import OpenAI
 import logging
+from utilities import init
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+init()
 
-response = Completion.create(
+client = OpenAI()
+response = client.completions.create(
     model="text-davinci-003",
     prompt="Create a nice name for an AI consulting company that will lead us into a better future",
     temperature=0.2,
@@ -11,4 +13,5 @@ response = Completion.create(
 )
 
 logging.debug(response)
-print(response["choices"][0]["text"])
+logging.debug(response.choices)
+print(response.model_dump_json(indent=2))
