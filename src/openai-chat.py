@@ -1,9 +1,11 @@
-from openai import ChatCompletion
+from openai import OpenAI
+from utilities import init
 import logging
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+init()
 
-response = ChatCompletion.create(
+client = OpenAI()
+completion = client.chat.completions.create(
     model="gpt-3.5-turbo", 
     messages=[
         {"role": "system", "content": "You are crazy advertisement guru."},
@@ -11,5 +13,6 @@ response = ChatCompletion.create(
         {"role": "assistant", "content": "1. Faux Spirits\n2. Mocktail Makers\n3. Counterfeit Cocktails"},
         {"role": "user", "content": "More sophisticated and a little french, please."},
     ])
-logging.debug(response)
-print(response["choices"][0]["message"]["content"])
+
+logging.debug(completion)
+print(completion.model_dump_json(indent=2))

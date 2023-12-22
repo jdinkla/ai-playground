@@ -9,7 +9,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("prompt", help="the image prompt", default="Ernie and Bert eat cookies")
 args = parser.parse_args()
 
-
 client = OpenAI()
 response = client.images.generate(
   model="dall-e-3",
