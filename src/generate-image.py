@@ -1,15 +1,14 @@
 from openai import OpenAI
-from check_env import check_env
+from utilities import init
 import argparse
 import logging
 
-check_env()
+init()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("prompt", help="the image prompt", default="Ernie and Bert eat cookies")
 args = parser.parse_args()
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 client = OpenAI()
 response = client.images.generate(
