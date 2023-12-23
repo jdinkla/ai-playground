@@ -1,4 +1,6 @@
-from utilities import init
+"""
+This script uses the OpenAI API to convert text to speech.
+"""
 import argparse
 from pathlib import Path
 from openai import OpenAI

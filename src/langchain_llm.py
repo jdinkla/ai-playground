@@ -1,3 +1,6 @@
+"""
+This is a sample script to demonstrate the use of the OpenAI LLM.
+"""
 from langchain.llms import OpenAI
 from utilities import init
 

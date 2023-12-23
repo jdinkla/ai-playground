@@ -1,7 +1,10 @@
-from openai import OpenAI
-from utilities import init
+"""
+This script generates an image from a prompt using the OpenAI API.
+"""
 import argparse
 import logging
+from openai import OpenAI
+from utilities import init
 
 init()
 

@@ -1,3 +1,6 @@
+"""
+This is an example of how to use the PromptTemplate.
+"""
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
@@ -5,7 +8,7 @@ from utilities import init
 
 init()
 
-template = """
+TEMPLATE = """
 You describe an image for a text2image AI.
 Describe the contents with keywords that can be recognised by the AI.
 Use adjectives to describe details. 
@@ -17,7 +20,7 @@ Question: {question}
 
 prompt = PromptTemplate(
     input_variables=["question"],
-    template=template
+    template=TEMPLATE
 )
 
 chain = LLMChain(llm=OpenAI(temperature=0.5), prompt=prompt)
