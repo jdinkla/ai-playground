@@ -4,7 +4,8 @@ A dialogue between two parties in a fictional world.
 
 import logging
 from utilities import init
-from openai_dialogue import Dialogue, Person, german
+from openai_dialogue import Dialogue, Person
+from language import german
 
 init(logging.WARNING)
 
@@ -66,4 +67,5 @@ dialogue = Dialogue(
     german
     )
 
-dialogue.play(NAME_M, "Wir sprechen über die nächste Wahl. Was wird Ihre Partei gegen die Krise tun?", 2)
+dialogue.add(NAME_M, "Wir sprechen über die nächste Wahl. Was wird Ihre Partei gegen die Krise tun?")
+dialogue.play(2)

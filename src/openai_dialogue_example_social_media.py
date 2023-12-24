@@ -4,7 +4,8 @@ A dialogue between two parties in a fictional world.
 
 import logging
 from utilities import init
-from openai_dialogue import Dialogue, Person, english
+from openai_dialogue import Dialogue, Person
+from language import english
 
 init(logging.WARNING)
 
@@ -43,6 +44,8 @@ It is your personal mission.
 If someone uses a quote, you try to use another quote from the same person that prooves your point and not theirs.
 If you answer to a statement of {NAME_B}, pick a weak argument and try to win the viewers over to your side.
 Maybe this is your last chance to win the election - ever.
+
+Use direct speech.
 """
 
 PROMPT_B = f"""
@@ -51,10 +54,12 @@ Your name is {NAME_B} and you are a politician and leader of the B party.
 You see freedom of speech and books as necessary for a economic succesful society. 
 The opposition is clearly clueless but you fear that people may believe them because you have not invested enough in education.
 You like to quote famous people and books. But because many people have no higher education, you prefer simple quotes.
+
+Use direct speech.
 """
 
 MODEL = "gpt-3.5-turbo-1106"
-# MODEL = "gpt-4"
+#MODEL = "gpt-4"
 # MODEL = "gpt-4-1106-preview"
 
 dialogue = Dialogue(
@@ -62,8 +67,9 @@ dialogue = Dialogue(
     [ Person(name = NAME_A, prompt = PROMPT_A), 
       Person(name = NAME_B, prompt = PROMPT_B)
       ],
-    "gpt-3.5-turbo-1106",
-    english
+    MODEL,
+    language=english
     )
 
-dialogue.play(NAME_M, "Welcome to the discussion! We are talking about the next election. What is your party going to do?", 2)
+dialogue.add(NAME_M, "Welcome to the discussion! We are talking about the next election. What is your party going to do?")
+dialogue.play(2)
