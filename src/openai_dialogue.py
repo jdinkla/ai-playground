@@ -6,113 +6,74 @@ import logging
 from openai import OpenAI
 from utilities import init
 from openai_utilities import message, create_messages
+from pydantic import BaseModel
 
-init()
+class Language(BaseModel):
+    discussion_starter: str
+    question_to_go_on: str
+    saidString: str
 
-NAME_M = "Mrs. M."
-NAME_A = "Mr. Arenheit"
-NAME_B = "Mrs. Berkel"
+    def said(self, name, content):
+        return f"{name} {self.saidString}: '{content}'"
+    
+english = Language(
+    discussion_starter="Welcome to the discussion! We are talking about the next election. What is your party going to do?", 
+    question_to_go_on="what is your answer?", 
+    saidString="said")
 
-WORLD_DESCRIPTION = f"""
-This dialogue is part of a TV discussion in a fictional world. 
+language = english
 
-Since 5 years the economy is in misarray because of the high inflation. 
-The people are increasingly unhappy and looking for alternatives.
-Almost all citizens are watching the discussion, so it is very important to win the discussion.
+class Person(BaseModel):
+    name: str
+    prompt: str
 
-The A party believes similiar to the novel "Fahrenheit 451" that social media is dangerous and should be banned. 
-The book "Fahrenheit 451" itself is not known in this fictional world.
-The leader of the A party is {NAME_A}.
-The A party is part of the opposition. 
-The other parties are very small. 
+    def description(self, world_description):
+        return f"""
+{self.prompt}
 
-The B party is ruling the country.
-The B party believes in free speech similiar as Germany today. 
-{NAME_B} is leader of the B party and is ruling the country. 
-
-People involved in the discussion:
-    - {NAME_M} is the moderator of the discussion. 
-    - {NAME_B}
-    - {NAME_A}
+{world_description}
 """
 
+class Dialogue:
+    def __init__(self, world, persons, model, language):
+        self.world = world
+        self.persons = persons
+        self.clients = { person.name: OpenAI() for person in persons}
+        self.model = model
+        self.language = language
+        self.history = []
 
-PROMPT_A = f"""
-You are taking part in an TV discussion in a fictional world. Your name is {NAME_A} and you are a politician and leader of the A party. 
-You really think that social media is dangerous and should be banned. 
-It is your personal mission.
-If someone uses a quote, you try to use another quote from the same person that prooves your point and not theirs.
-If you answer to a statement of {NAME_B}, pick a weak argument and try to win the viewers over to your side.
-Maybe this is your last chance to win the election - ever.
-"""
+    def play(self, person, greeting, number_of_turns):
+        print_message(self.language.said(person, greeting))
+        self.add_to_history(person, greeting)
+        for i in range(number_of_turns):
+            for person in self.persons:
+                self.turn(person.name, self.clients[person.name], person.description(self.world))
 
-PROMPT_B = f"""
-You are taking part in an TV discussion in a fictional world. 
-Your name is {NAME_B} and you are a politician and leader of the B party.
-You see freedom of speech and books as necessary for a economic succesful society. 
-The opposition is clearly clueless but you fear that people may believe them because you have not invested enough in education.
-You like to quote famous people and books. But because many people have no higher education, you prefer simple quotes.
-"""
+    def turn(self, name, client, system):
+        messages = create_messages(
+                                    message("system", system),
+                                    self.history,
+                                    message("user", f"{name} {self.language.question_to_go_on}")
+                                )
+        response = self.get_new_message(client, messages)
+        print_message(response)
+        self.add_to_history(name, response)
 
-SYSTEM_A = f"""
-{PROMPT_A}
+    def get_new_message(self, client, messages):
+        "get the next message"
+        response = client.chat.completions.create(
+            model=self.model,
+            messages=messages
+        )
+        logging.debug(response)
+        message = response.choices[0].message.content
+        return message
 
-{WORLD_DESCRIPTION}
-"""
-
-SYSTEM_B = f"""
-{PROMPT_B}
-
-{WORLD_DESCRIPTION}
-"""
-
-
-# MODEL = "gpt-3.5-turbo-1106"
-MODEL = "gpt-4"
-# MODEL = "gpt-4-1106-preview"
-
-clientA = OpenAI()
-clientB = OpenAI()
-
-def get_new_message(client, messages):
-    "get the next message"
-    response = client.chat.completions.create(
-        model=MODEL,
-        messages=messages
-    )
-    logging.debug(response)
-    message = response.choices[0].message.content
-    return message
-
+    def add_to_history(self, name, content):
+        self.history.append(message("user", self.language.said(name, content)))
 
 def print_message(content):
     print("---------------------------------------------------------------------")
     print(content)
-    print("---------------------------------------------------------------------")
-
-def said(name, message):
-    return f"{name} said: '{message}'"
-
-history = []
-
-def add_to_history(content):
-    history.append(message("user", content))
-
-add_to_history(said(NAME_M, 'Welcome to the discussion! We are talking about the next election. What is your party going to do?'))
-
-def turn(name, client, system):
-    response = get_new_message(client,
-                            create_messages(
-                                message("system", system),
-                                history,
-                                message("user", f"{name} what is your answer?")
-                            )
-                            )
-    print_message(response)
-    add_to_history(said(name, response))
-
-turn(NAME_A, clientA, SYSTEM_A)
-turn(NAME_B, clientB, SYSTEM_B)
-turn(NAME_A, clientA, SYSTEM_A)
-
-print(history)
+    

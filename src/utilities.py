@@ -6,11 +6,12 @@ import sys
 import logging
 import pygame
 
-def init():
+logggingFormat = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+def init(level = logging.DEBUG):
     "initialize the project"
     _check_env()
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logging.basicConfig(level=level, format=logggingFormat)
 
 def _check_env():
     "check the environment variable OPENAI_API_KEY"
