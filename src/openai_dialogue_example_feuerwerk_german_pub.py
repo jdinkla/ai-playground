@@ -43,8 +43,8 @@ Dein Motto ist: Keine Rücksicht auf andere.
 """
 
 #MODEL = "gpt-3.5-turbo-1106"
-MODEL = "gpt-4"
-# MODEL = "gpt-4-1106-preview"
+#MODEL = "gpt-4"
+MODEL = "gpt-4-1106-preview"
 
 dialogue = Dialogue(
     WORLD_DESCRIPTION,
