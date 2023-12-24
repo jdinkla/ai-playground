@@ -5,6 +5,7 @@ Simple completion using OpenAI API
 import logging
 from openai import OpenAI
 from utilities import init
+from openai_utilities import message
 
 init()
 
@@ -43,76 +44,41 @@ MODEL = "gpt-4"
 clientA = OpenAI()
 clientB = OpenAI()
 
-responseA = clientA.chat.completions.create(
-    model=MODEL,
-    messages=[
-        {
-            "role": "system",
-            "content": PROMPT_A
-        },
-        {
-            "role": "user",
-            "content": "Mr. A. start the discussion!"
-        }
-    ]
-)
+def get_new_message(client, messages):
+    "get the next message"
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=messages
+    )
+    logging.debug(response)
+    message = response.choices[0].message.content        
+    return message
 
-logging.debug(responseA)
-messageA = responseA.choices[0].message.content
-print("---------------------------------------------------------------------")
-print(messageA)
-print("---------------------------------------------------------------------")
+def print_message(message):
+    print("---------------------------------------------------------------------")
+    print(message)
+    print("---------------------------------------------------------------------")
 
+messageA = get_new_message(clientA, [
+        message("system", PROMPT_A),
+        message("user", "Mr. A. start the discussion!"),
+    ])
+print_message(messageA)
 
-responseB = clientB.chat.completions.create(
-    model=MODEL,
-    messages=[
-        {
-            "role": "system",
-            "content": PROMPT_B
-        },
-        {
-            "role": "user",
-            "content": "Mr. A. said : '" + messageA + "'"
-        },
-        {
-            "role": "user",
-            "content": "Mrs. B. what is your answer?"
-        },
-    ]
-)
+messageB = get_new_message(clientB, [
+        message("system", PROMPT_B),
+        message("user", "Mr. A. said : '" + messageA + "'"),
+        message("user", "Mrs. B. what is your answer?"),
+    ])
+print_message(messageB)
 
-logging.debug(responseB)
-messageB = responseB.choices[0].message.content
-print("---------------------------------------------------------------------")
-print(messageB)
-print("---------------------------------------------------------------------")
+messageA = get_new_message(clientA, [
+        message("system", PROMPT_A),
+        message("user", "Mr. A. said : '" + messageA + "'"),
+        message("user", "Mr. B. said : '" + messageB + "'"),
+    ])
+print_message(messageA)
 
-responseA = clientA.chat.completions.create(
-    model=MODEL,
-    messages=[
-        {
-            "role": "system",
-            "content": PROMPT_A
-        },
-         {
-            "role": "user",
-            "content": "Mr. A. said : '" + messageA + "'"
-        },
-        {
-            "role": "user",
-            "content": "Mrs. B. said : '" + messageB + "'"
-        },
-        {
-            "role": "user",
-            "content": "Mr. A. what is your answer?"
-        },
-    ]
-)
-
-logging.debug(responseA)
-messageA = responseA.choices[0].message.content
-print("---------------------------------------------------------------------")
-print(messageA)
-print("---------------------------------------------------------------------")
-
+# def create(prompt, messages, question):
+#     combined = combine_messages(system_message(prompt), messages, question)
+#     return combined
