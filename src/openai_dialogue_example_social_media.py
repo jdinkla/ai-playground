@@ -9,8 +9,8 @@ from openai_dialogue import Dialogue, Person, english
 init(logging.WARNING)
 
 NAME_M = "Mrs. M."
-NAME_A = "Mr. Arenheit"
-NAME_B = "Mrs. Berkel"
+NAME_A = "Mr. A."
+NAME_B = "Mrs. B."
 
 WORLD_DESCRIPTION = f"""
 This dialogue is part of a TV discussion in a fictional world. 
@@ -66,4 +66,4 @@ dialogue = Dialogue(
     english
     )
 
-dialogue.play(NAME_M, english.discussion_starter, 2)
+dialogue.play(NAME_M, "Welcome to the discussion! We are talking about the next election. What is your party going to do?", 2)

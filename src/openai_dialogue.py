@@ -9,7 +9,6 @@ from openai_utilities import message, create_messages
 from pydantic import BaseModel
 
 class Language(BaseModel):
-    discussion_starter: str
     question_to_go_on: str
     saidString: str
 
@@ -17,11 +16,12 @@ class Language(BaseModel):
         return f"{name} {self.saidString}: '{content}'"
     
 english = Language(
-    discussion_starter="Welcome to the discussion! We are talking about the next election. What is your party going to do?", 
     question_to_go_on="what is your answer?", 
     saidString="said")
 
-language = english
+german = Language(
+    question_to_go_on="Was meinen Sie?", 
+    saidString="sagt")
 
 class Person(BaseModel):
     name: str
