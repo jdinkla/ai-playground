@@ -15,9 +15,9 @@ args = parser.parse_args()
 
 init(logging.WARNING)
 
-#MODEL = "gpt-3.5-turbo-1106"
-# MODEL = "gpt-4"
-MODEL = "gpt-4-1106-preview"
+MODEL = "gpt-3.5-turbo-1106"
+#MODEL = "gpt-4"
+#MODEL = "gpt-4-1106-preview"
 
 with open(args.filename, 'r') as file:
     content = file.read()

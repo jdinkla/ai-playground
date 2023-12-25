@@ -3,17 +3,17 @@
     "persons": [
         {
             "name": "A",
-            "prompt": "You are a functional programmer and want to use Haskell. There is no compromise.",
+            "prompt": "You are a functional programmer and want to use Haskell. There is no compromise. Listen to the arguments of the others and refuse them.",
             "voice": "onyx"
         },
         {
             "name": "B",
-            "prompt": "You are a Java deveoper and OOD is your religion.",
+            "prompt": "You are a Java deveoper and OOD is your religion. Listen to the arguments of the others and refuse them.",
             "voice": "nova"
         },
         {
             "name": "C",
-            "prompt": "You are Kotlin developer and mix the best of FP and OO",
+            "prompt": "You are Kotlin developer and mix the best of FP and OO. Listen to the arguments of the others and refuse them.",
             "voice": "nova"
         }
     ]
