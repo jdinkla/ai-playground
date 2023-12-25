@@ -6,6 +6,7 @@ import argparse
 import logging
 from openai import OpenAI
 from utilities import init
+from openai_utilities import message
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="the name of a file with a story")
@@ -22,22 +23,16 @@ The user will present you with a story of a crime and you will have to solve it.
 with open(args.filename, 'r') as file:
     content = file.read()
 
-#MODEL = "gpt-3.5-turbo-1106"
+MODEL = "gpt-3.5-turbo-1106"
 #MODEL = "gpt-4-32k-0613"
-MODEL = "gpt-4-1106-preview"
+#MODEL = "gpt-4-1106-preview"
 
 client = OpenAI()
 response = client.chat.completions.create(
     model=MODEL,
     messages=[
-        {
-            "role": "system",
-            "content": PROMPT
-        },
-        {
-            "role": "user",
-            "content": content
-        }
+        message("system", PROMPT),
+        message("user", content)
     ]
 )
 

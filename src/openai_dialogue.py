@@ -64,7 +64,7 @@ class Dialogue:
         if name in content:
             msg = content
         else:
-            msg = self.language.said(name, content)
+            msg = f"[{name}] {content}"
         print(msg)
         self.history.append(message("user", msg))
         print() 
