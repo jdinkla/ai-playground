@@ -14,7 +14,6 @@ args = parser.parse_args()
 
 init()
 
-
 PROMPT="""
 You are an investigator and a detective.
 The user will present you with a story of a crime and you will have to solve it. Explain your reasoning.

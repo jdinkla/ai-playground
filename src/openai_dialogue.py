@@ -28,7 +28,7 @@ class Dialogue:
         self.model = model
         self.language = language
         self.speak = speak
-        self.history = []
+        self.history = {person.name: [] for person in persons}
         self.clients = {person.name: OpenAI() for person in persons}
         self.prompts = {person.name: person.extended_prompt(self.world) for person in persons}
 
@@ -43,7 +43,7 @@ class Dialogue:
         print("----------------------------------------------------")
         name = person.name
         messages = create_messages(message("system", initial_prompt),
-                                   self.history,
+                                   self.history[name],
                                    message("user", f"{name} {self.language.question_to_go_on}"))
         response = self.get_new_message(client, messages)
         self.add(name, response)
@@ -66,5 +66,9 @@ class Dialogue:
         else:
             msg = f"[{name}] {content}"
         print(msg)
-        self.history.append(message("user", msg))
+        for key, value in self.history.items():
+            if key == name:
+                value.append(message("user", msg))
+            else:
+                value.append(message("assistant", msg))
         print() 
