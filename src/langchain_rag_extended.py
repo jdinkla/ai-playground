@@ -11,6 +11,7 @@ init()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="the name of a text file")
+parser.add_argument("question", help="the question to ask")
 args = parser.parse_args()
 
 with open(args.filename, 'r') as file:
@@ -41,6 +42,6 @@ setup_and_retrieval = RunnableParallel({
 )
 chain = setup_and_retrieval | prompt | model | output_parser
 
-result = chain.invoke("Who is Mary Marvell?")
+result = chain.invoke(args.question)
 
 print(result)
