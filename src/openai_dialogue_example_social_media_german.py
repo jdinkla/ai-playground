@@ -4,7 +4,7 @@ A dialogue between two parties in a fictional world.
 
 import logging
 from utilities import init
-from openai_dialogue import Dialogue, Person
+from openai_dialogue import Dialogue, Person, Scene
 from language import german
 
 init(logging.WARNING)
@@ -58,14 +58,13 @@ MODEL = "gpt-3.5-turbo-1106"
 # MODEL = "gpt-4"
 # MODEL = "gpt-4-1106-preview"
 
-dialogue = Dialogue(
-    WORLD_DESCRIPTION,
-    [ Person(name = NAME_A, prompt = PROMPT_A), 
-      Person(name = NAME_B, prompt = PROMPT_B)
-      ],
-    MODEL,
-    german
-    )
+scene = Scene(
+    description=WORLD_DESCRIPTION,
+    persons=[Person(name=NAME_A, prompt=PROMPT_A),
+             Person(name=NAME_B, prompt=PROMPT_B)
+             ]
+)
 
+dialogue = Dialogue(scene, MODEL, german)
 dialogue.add(NAME_M, "Wir sprechen über die nächste Wahl. Was wird Ihre Partei gegen die Krise tun?")
 dialogue.play(2)

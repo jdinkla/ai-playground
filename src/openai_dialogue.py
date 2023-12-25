@@ -8,6 +8,8 @@ from openai_utilities import message, create_messages,speak
 from pydantic import BaseModel
 from language import english
 
+
+
 class Person(BaseModel):
     name: str
     prompt: str
@@ -21,16 +23,22 @@ class Person(BaseModel):
 """
 
 
+class Scene(BaseModel):
+    description: str
+    persons: list[Person]
+
+
 class Dialogue:
-    def __init__(self, world, persons, model = "gpt-3.5-turbo-1106", language = english, speak = False):
-        self.world = world
-        self.persons = persons
+    def __init__(self, scene, model = "gpt-3.5-turbo-1106", language = english, speak = False):
+        self.scene = scene
+        self.world = scene.description
+        self.persons = scene.persons
         self.model = model
         self.language = language
         self.speak = speak
-        self.history = {person.name: [] for person in persons}
-        self.clients = {person.name: OpenAI() for person in persons}
-        self.prompts = {person.name: person.extended_prompt(self.world) for person in persons}
+        self.history = {person.name: [] for person in scene.persons}
+        self.clients = {person.name: OpenAI() for person in scene.persons}
+        self.prompts = {person.name: person.extended_prompt(self.world) for person in scene.persons}
 
     def play(self, number_of_turns):
         for i in range(number_of_turns):
