@@ -35,7 +35,7 @@ while True:
     user_input = input("Your question (or type 'exit' to quit): ")
     if user_input.lower() == "exit":
         break
-    ai_response = conversation.predict(input=user_input)
-    print(ai_response)
+    response = conversation.predict(input=user_input)
+    print(response)
     memory.chat_memory.add_user_message(user_input)
-    memory.chat_memory.add_ai_message(ai_response)
+    memory.chat_memory.add_ai_message(response)

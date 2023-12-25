@@ -17,6 +17,5 @@ output_parser = StrOutputParser()
 
 chain = prompt | model | output_parser
 
-x = chain.invoke({"topic": args.topic})
-
-print(x)
+response = chain.invoke({"topic": args.topic})
+print(response)

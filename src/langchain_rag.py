@@ -32,6 +32,5 @@ setup_and_retrieval = RunnableParallel({
 )
 chain = setup_and_retrieval | prompt | model | output_parser
 
-result = chain.invoke("where did harrison work?")
-
-print(result)
+response = chain.invoke("where did harrison work?")
+print(response)

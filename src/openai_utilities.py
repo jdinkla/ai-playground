@@ -4,7 +4,6 @@
 from pathlib import Path
 from utilities import play_mp3
 
-
 def message(role, content):
     return {
         "role": role,

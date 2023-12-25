@@ -34,6 +34,5 @@ response = client.chat.completions.create(
         message("user", content)
     ]
 )
-
 logging.debug(response)
 print(response.choices[0].message.content)
