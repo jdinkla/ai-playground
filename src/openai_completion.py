@@ -4,17 +4,20 @@ Simple completion using OpenAI API
 
 import logging
 from openai import OpenAI
+from openai_utilities import MODELS
 from utilities import init
 
 init()
 
-MODEL = "gpt-3.5-turbo-instruct"
 
 client = OpenAI()
 response = client.completions.create(
-    model=MODEL,
-    prompt="Create a nice name for an AI consulting company that will lead us into a better future",
-    temperature=0.2,
+    model="gpt-3.5-turbo-instruct",
+    prompt="""
+        Create a name for an AI consulting company that will lead us into a better and fairer future. 
+        The name should not include 'solutions', 'tech' or 'consulting'.
+        """,
+    temperature=0.9,
     max_tokens=30
 )
 

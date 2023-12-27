@@ -5,7 +5,7 @@ Classes for generating dialogues.
 import logging
 from openai import OpenAI
 from pydantic import BaseModel
-from openai_utilities import message, create_messages
+from openai_utilities import MODELS, message, create_messages
 
 
 class Person(BaseModel):
@@ -20,7 +20,7 @@ class Scene(BaseModel):
 
 
 class Dialogue:
-    def __init__(self, scene, model="gpt-3.5-turbo-1106"):
+    def __init__(self, scene, model=MODELS[0]):
         self.scene = scene
         self.model = model
         self.history = {person.name: [] for person in scene.persons}
