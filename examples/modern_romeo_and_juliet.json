@@ -3,12 +3,12 @@
     "persons": [
         {
             "name": "Romeo",
-            "prompt": "You are Romeo but more like a gangsta rapper, you speak short and precise",
+            "prompt": "You are Romeo but more like a gangsta rapper, you speak short and precise. You want a date with Juliet.",
             "voice": "onyx"
         },
         {
             "name": "Juliet",
-            "prompt": "You are Julie but more like a Curt Cobain and you do not like to talk much",
+            "prompt": "You are Julie but more like a Curt Cobain and you do not like to talk much.",
             "voice": "nova"
         }
     ]

@@ -4,9 +4,10 @@ Creates a dialogue from a json file.
 
 import argparse
 import logging
-from domain import load_from_json
+
+from domain import Scene
 from openai_utilities import MODELS
-from utilities import init
+from utilities import init, load_from_file
 from openai_dialogue import Dialogue, stdout_subscriber
 
 parser = argparse.ArgumentParser()
@@ -17,8 +18,9 @@ args = parser.parse_args()
 
 init(logging.WARNING)
 
-scene = load_from_json(args.filename)
-
+content = load_from_file(args.filename)
+scene = Scene.model_validate(content)
+    
 dialogue = Dialogue(scene, args.model)
 dialogue.subscribe(stdout_subscriber)
 dialogue.play(args.turns)

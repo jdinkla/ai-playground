@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+import yaml
 
 
 class Person(BaseModel):
@@ -11,9 +12,3 @@ class Scene(BaseModel):
     description: str
     persons: list[Person]
 
-
-def load_from_json(path):
-    with open(path, 'r') as file:
-        content = file.read()
-        scene = Scene.parse_raw(content)
-    return scene

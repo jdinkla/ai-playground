@@ -1,0 +1,9 @@
+description: This is the description
+persons:
+- name: C
+  prompt: You are C
+  voice: onyx
+- name: D
+  prompt: >
+    D is a multi-line person
+  voice: nova

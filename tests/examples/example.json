@@ -1,0 +1,15 @@
+{
+    "description": "This is the description",
+    "persons": [
+        {
+            "name": "A",
+            "prompt": "You are A",
+            "voice": "onyx"
+        },
+        {
+            "name": "B",
+            "prompt": "B is a person",
+            "voice": "nova"
+        }
+    ]
+}
