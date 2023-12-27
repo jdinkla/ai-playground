@@ -9,7 +9,6 @@ from utilities import init
 
 init()
 
-
 client = OpenAI()
 response = client.completions.create(
     model="gpt-3.5-turbo-instruct",

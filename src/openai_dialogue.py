@@ -1,23 +1,10 @@
 """
-Classes for generating dialogues.
+Dialog generator.
 """
 
 import logging
 from openai import OpenAI
-from pydantic import BaseModel
 from openai_utilities import MODELS, message, create_messages
-
-
-class Person(BaseModel):
-    name: str
-    prompt: str
-    voice: str = "nova"
-
-
-class Scene(BaseModel):
-    description: str
-    persons: list[Person]
-
 
 class Dialogue:
     def __init__(self, scene, model=MODELS[0]):

@@ -22,3 +22,4 @@ def _check_env():
 def save_as_json(data, path):
     with open(path, 'w') as outfile:
         json.dump(data, outfile)
+
