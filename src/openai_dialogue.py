@@ -14,13 +14,6 @@ class Person(BaseModel):
     prompt: str
     voice: str = "nova"
 
-    def extended_prompt(self, world_description):
-        return f"""
-{world_description}
-
-{self.prompt}
-"""
-
 
 class Scene(BaseModel):
     description: str
@@ -30,31 +23,31 @@ class Scene(BaseModel):
 class Dialogue:
     def __init__(self, scene, model="gpt-3.5-turbo-1106", language=english, speak=False):
         self.scene = scene
-        self.world = scene.description
-        self.persons = scene.persons
         self.model = model
         self.language = language
         self.speak = speak
         self.history = {person.name: [] for person in scene.persons}
         self.clients = {person.name: OpenAI() for person in scene.persons}
-        self.prompts = {person.name: person.extended_prompt(
-            self.world) for person in scene.persons}
+        self.prompts = {person.name: extended_prompt(scene.description, person.prompt) for person in scene.persons}
 
     def play(self, number_of_turns):
         for i in range(number_of_turns):
-            for person in self.persons:
+            for person in self.scene.persons:
                 self.turn(person)
 
     def turn(self, person):
         print("----------------------------------------------------")
         client = self.clients[person.name]
-        chat_history = self.create_history(person)
+        chat_history = self.create_chat_history(person)
         response = self.get_response(client, chat_history)
-        self.add(person.name, response)
+        msg = create_message(person.name, response)
+        print(msg)
+        print()
+        self.add(person.name, msg)
         if self.speak:
             speak(client, response, person.voice)
 
-    def create_history(self, person):
+    def create_chat_history(self, person):
         name = person.name
         prompt = message("system", self.prompts[name])
         history = self.history[name]
@@ -71,15 +64,28 @@ class Dialogue:
         message = response.choices[0].message.content
         return message
 
-    def add(self, name, content):
-        if name in content:
-            msg = content
-        else:
-            msg = f"[{name}] {content}"
-        print(msg)
+    def add(self, name, msg):
         for key, value in self.history.items():
-            if key == name:
-                value.append(message("user", msg))
-            else:
-                value.append(message("assistant", msg))
-        print()
+            value.append(message(role(key, name), msg))
+
+
+def create_message(name, content):
+    if name in content:
+        msg = content
+    else:
+        msg = f"[{name}] {content}"
+    return msg    
+
+def role(key, name):
+    if key == name:
+        role = "user"
+    else:
+        role = "assistant"
+    return role
+
+def extended_prompt(world_description, prompt):
+    return f"""
+{world_description}
+
+{prompt}
+"""
