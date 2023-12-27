@@ -4,7 +4,7 @@ Utilities for the project.
 import os
 import sys
 import logging
-import pygame
+import json
 
 logggingFormat = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 
@@ -19,10 +19,6 @@ def _check_env():
         print("OPENAI_API_KEY is not set. Exiting.")
         sys.exit(1)
 
-def play_mp3(path_to_mp3):
-    "play an mp3 file"
-    pygame.mixer.init()
-    pygame.mixer.music.load(path_to_mp3)
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
+def save_as_json(data, path):
+    with open(path, 'w') as outfile:
+        json.dump(data, outfile)

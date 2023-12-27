@@ -4,9 +4,8 @@ Classes for generating dialogues.
 
 import logging
 from openai import OpenAI
-from openai_utilities import message, create_messages, speak
 from pydantic import BaseModel
-from language import english
+from openai_utilities import message, create_messages
 
 
 class Person(BaseModel):
@@ -21,14 +20,16 @@ class Scene(BaseModel):
 
 
 class Dialogue:
-    def __init__(self, scene, model="gpt-3.5-turbo-1106", language=english, speak=False):
+    def __init__(self, scene, model="gpt-3.5-turbo-1106"):
         self.scene = scene
         self.model = model
-        self.language = language
-        self.speak = speak
         self.history = {person.name: [] for person in scene.persons}
         self.clients = {person.name: OpenAI() for person in scene.persons}
         self.prompts = {person.name: extended_prompt(scene.description, person.prompt) for person in scene.persons}
+        self.subscribers = []
+
+    def subscribe(self, subscriber):
+        self.subscribers.append(subscriber)
 
     def play(self, number_of_turns):
         for i in range(number_of_turns):
@@ -36,37 +37,33 @@ class Dialogue:
                 self.turn(person)
 
     def turn(self, person):
-        print("----------------------------------------------------")
         client = self.clients[person.name]
         chat_history = self.create_chat_history(person)
-        response = self.get_response(client, chat_history)
+        response = get_response(self.model, client, chat_history)
         msg = create_message(person.name, response)
-        print(msg)
-        print()
-        self.add(person.name, msg)
-        if self.speak:
-            speak(client, response, person.voice)
+        self.add_to_histories(person.name, msg)
+        for subscriber in self.subscribers:
+            subscriber(client, person, response)
 
     def create_chat_history(self, person):
         name = person.name
         prompt = message("system", self.prompts[name])
         history = self.history[name]
-        question = message("user", f"{name} {self.language.question_to_go_on}")
+        question = message("user", f"{name}?")
         return create_messages(prompt, history, question)
 
-    def get_response(self, client, chat_history):
-        "get the next message"
-        response = client.chat.completions.create(
-            model=self.model,
-            messages=chat_history
-        )
-        logging.debug(response)
-        message = response.choices[0].message.content
-        return message
-
-    def add(self, name, msg):
+    def add_to_histories(self, name, msg):
         for key, value in self.history.items():
-            value.append(message(role(key, name), msg))
+            value.append(message(get_role(key, name), msg))
+
+
+def get_response(model, client, chat_history):
+    response = client.chat.completions.create(
+        model=model,
+        messages=chat_history
+    )
+    logging.debug(response)
+    return response.choices[0].message.content
 
 
 def create_message(name, content):
@@ -74,9 +71,9 @@ def create_message(name, content):
         msg = content
     else:
         msg = f"[{name}] {content}"
-    return msg    
+    return msg
 
-def role(key, name):
+def get_role(key, name):
     if key == name:
         role = "user"
     else:
@@ -89,3 +86,9 @@ def extended_prompt(world_description, prompt):
 
 {prompt}
 """
+
+def stdout_subscriber(client, person, response):
+    msg = create_message(person.name, response)
+    print("----------------------------------------------------")
+    print(msg)
+    print()
