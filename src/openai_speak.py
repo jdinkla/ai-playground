@@ -26,5 +26,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("message", help="the message to speak")
 args = parser.parse_args()
 
-client = OpenAI()
-speak(client, args.message, "nova")
+def example():
+    client = OpenAI()
+    speak(client, args.message, "nova")
+
+example()

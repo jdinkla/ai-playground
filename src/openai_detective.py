@@ -17,10 +17,10 @@ init()
 
 PROMPT="""
 You are an investigator and a detective.
-The user will present you with a story of a crime and you will have to solve it. Explain your reasoning.
+The user will present you with a story of a crime and you will have to solve it. Explain your reasoning step by step.
 """
 
-with open(args.filename, 'r') as file:
+with open(args.filename, 'r', encoding="utf-8") as file:
     content = file.read()
 
 client = OpenAI()

@@ -1,5 +1,7 @@
+"""
+Domain classes.
+"""
 from pydantic import BaseModel
-import yaml
 
 
 class Person(BaseModel):
@@ -11,4 +13,3 @@ class Person(BaseModel):
 class Scene(BaseModel):
     description: str
     persons: list[Person]
-

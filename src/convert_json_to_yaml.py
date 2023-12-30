@@ -1,5 +1,7 @@
+"""
+Utility for converting the json examples to yaml.
+"""
 import argparse
-import json
 import yaml
 
 from domain import Scene
