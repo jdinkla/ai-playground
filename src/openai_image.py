@@ -9,7 +9,7 @@ from utilities import init
 init()
 
 parser = argparse.ArgumentParser()
-parser.add_argument("prompt", help="the image prompt", default="Ernie and Bert eat cookies")
+parser.add_argument("prompt", help="the prompt that describes the image")
 args = parser.parse_args()
 
 client = OpenAI()
@@ -23,4 +23,5 @@ response = client.images.generate(
 logging.debug(response)
 
 image_url = response.data[0].url
+print("Click on the following URL to view the image:")
 print(image_url)

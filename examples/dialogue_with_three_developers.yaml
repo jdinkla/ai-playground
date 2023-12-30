@@ -1,6 +1,6 @@
 description: >
   This is a simple example of a conversation between three people about a new software project. 
-  You have to decide which programming language to use.
+  You have to decide which programming language to use. You only can say 3 sentences.
 persons:
 - name: A
   prompt: >

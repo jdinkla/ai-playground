@@ -23,8 +23,7 @@ def speak_subscriber(client, person, response):
 init()
 
 parser = argparse.ArgumentParser()
-parser.add_argument("message", help="the message to speak",
-                    default="Ernie and Bert eat cookies")
+parser.add_argument("message", help="the message to speak")
 args = parser.parse_args()
 
 client = OpenAI()
