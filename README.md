@@ -39,7 +39,7 @@ There are the following examples
 ## Creating dialogues
 
 A more advanced example is the creation of dialogues of two or more agents.
-The scene of a dialog can be specified in a `yaml` or `json` file. See the `examples` folder.
+The scene of a dialog can be specified in a `yaml` or `json` file. See the `examples` folder and the next section.
 
 The following example is specification of a scene.
 
@@ -80,6 +80,23 @@ And this is an example session
     Beneath your pane, I'll meet you—walk?
     This night's ours, no need for light.
     Let's vanish, just feels right.
+
+## Generating a dialogue descriptionv
+
+With `src/openai_dialogue_generator.py` you can generate dialogue descriptions and modify them afterwards if needed.
+
+    $ python src/openai_dialogue_generator.py "Ernie and Bert discuss if they should eat cake or cookies"
+    ---------------------------------------------
+    description: >
+      Ernie and Bert are having a discussion in their living room about what they should have for dessert - cake or cookies.
+      They are sitting on their couch, surrounded by their favorite toys and books.
+    persons:
+      - name: Ernie
+        prompt: You are Ernie, and you love the idea of having cake for dessert. Use excitement and exclamation in your speech to convince Bert.
+        voice: onyx
+      - name: Bert
+        prompt: You are Bert, and you prefer cookies over cake. Use a calm and reasoned tone to persuade Ernie that cookies are the better choice.
+        voice: nova
 
 ## Installation
 
