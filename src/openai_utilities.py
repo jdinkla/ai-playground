@@ -2,6 +2,8 @@
 Utilities for OpenAI API
 """
 
+import logging
+
 MODELS = ["gpt-3.5-turbo-1106", "gpt-4-32k-0613", "gpt-4-1106-preview"]
 
 
@@ -21,3 +23,42 @@ def create_messages(prompt, history, question):
     combined.insert(0, prompt)
     combined.append(question)
     return combined
+
+
+def create_chat_history(person, prompt, history):
+    promptAsMessage = message("system", prompt)
+    question = message("user", f"{person.name}?")
+    return create_messages(promptAsMessage, history, question)
+
+
+def get_response(model, client, chat_history):
+    response = client.chat.completions.create(
+        model=model,
+        messages=chat_history
+    )
+    logging.debug(response)
+    return response.choices[0].message.content
+
+
+def create_message(name, content):
+    if name in content:
+        msg = content
+    else:
+        msg = f"[{name}] {content}"
+    return msg
+
+
+def get_role(key, name):
+    if key == name:
+        role = "user"
+    else:
+        role = "assistant"
+    return role
+
+
+def extended_prompt(world_description, prompt):
+    return f"""
+{world_description}
+
+{prompt}
+"""

@@ -7,8 +7,8 @@ The `src` folder contains example scripts.
 
 Some of these scripts need command line arguments. You can call the program with the `-h` flag to get an explanation. For example
 
-    $ python src/openai_dialogue_generic.py -h                          
-    usage: openai_dialogue_generic.py [-h] filename turns [{gpt-3.5-turbo-1106,gpt-4-32k-0613,gpt-4-1106-preview}]
+    $ python src/openai_dialogue.py -h                          
+    usage: openai_dialogue.py [-h] filename turns [{gpt-3.5-turbo-1106,gpt-4-32k-0613,gpt-4-1106-preview}]
 
     positional arguments:
     filename              the name of a json file
@@ -18,11 +18,6 @@ Some of these scripts need command line arguments. You can call the program with
 
     options:
     -h, --help            show this help message and exit
-
-For example upi can 
-You can start an example (after installation, see below) with the
-
-    $ python src/openai_
 
 There are the following examples
 
@@ -64,7 +59,7 @@ persons:
 And this is an example session
 
 
-    $ python src/openai_dialogue_generic.py examples/modern_romeo_and_juliet.yaml 2 "gpt-4-1106-preview"
+    $ python src/openai_dialogue.py examples/modern_romeo_and_juliet.yaml 2 "gpt-4-1106-preview"
     ----------------------------------------------------
     [Romeo] Yo, Jules, peepin' ya still, queen of my world – fly high in them skies.
     Light it up, my night’s delight; how 'bout we roll, just you and I?
