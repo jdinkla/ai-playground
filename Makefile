@@ -5,6 +5,9 @@ init:
 freeze:
 	pip freeze -l > requirements.txt
 
+test:
+	pytest
+
 lint:
 	pylint src
 
