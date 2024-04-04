@@ -102,11 +102,12 @@ With `src/openai_dialogue_generator.py` you can generate dialogue descriptions a
 
 Install with
 
-    $ ./init.sh
+    $ make init
 
 Set the OPENAI-API key.
 
     $ export OPENAI_API_KEY="<INSERT-YOUR-KEY-HERE>"
+    $ source venv/bin/activate
 
 ## Issues
 
@@ -122,4 +123,3 @@ Install the new version again with.
     $ pip install -U pydantic
 
 See also the [langchain wiki](https://python.langchain.com/docs/guides/pydantic_compatibility).
-
