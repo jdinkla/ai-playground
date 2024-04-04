@@ -1,7 +1,7 @@
 """
 This is an example of how to use the ConversationChain class.
 """
-from langchain.llms import OpenAI
+from langchain_openai import OpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
