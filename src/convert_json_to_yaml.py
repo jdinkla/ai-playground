@@ -10,8 +10,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="the name of a json file")
 args = parser.parse_args()
 
-
 def convert_json_to_yaml(filename):
+    "convert a json file to a yaml file"
     yaml_filename = filename.replace('.json', '.yaml')
     with open(filename, 'r', encoding='utf-8') as json_file:
         data = json_file.read()

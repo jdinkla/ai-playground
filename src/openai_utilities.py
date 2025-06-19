@@ -4,8 +4,8 @@ Utilities for OpenAI API
 
 import logging
 
-MODELS = ["gpt-3.5-turbo-1106", "gpt-4-32k-0613", "gpt-4-1106-preview"]
-
+# see https://platform.openai.com/docs/models/model-endpoint-compatibility
+MODELS = ["gpt-4.1-nano-2025-04-14"]
 
 def message(role, content):
     return {

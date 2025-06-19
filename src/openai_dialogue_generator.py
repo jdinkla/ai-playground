@@ -10,13 +10,15 @@ from openai_utilities import MODELS, message
 from utilities import init
 
 parser = argparse.ArgumentParser()
-parser.add_argument("description", help="the description of the scene of the dialogue including the peoples involved.")
+parser.add_argument("description",
+    help="the description of the scene of the dialogue including the peoples involved.")
 parser.add_argument("model", help="the OpenAI model", default=MODELS[0], choices=MODELS, nargs='?')
 args = parser.parse_args()
 
 init(logging.WARNING)
 
 PROMPT = """
+You are a drama writer. 
 The user will give a description of a scene of a dialogue or a discusssion and the people involved.
 You will elaborate on the ideas of the user the create a nice description of the scene.
 And you will instruct every person with a prompt (similiar to an LLM prompt like OpenAI) how they should behave and argue.

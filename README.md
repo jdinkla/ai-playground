@@ -5,6 +5,12 @@ and [langchain](https://python.langchain.com/docs/get_started/introduction).
 
 The `src` folder contains example scripts.
 
+[Just](https://just.systems/man/en/) allows easy usage. Calling just without arguments shows a list of available commands
+
+```bash
+$ just
+```
+
 Some of these scripts need command line arguments. You can call the program with the `-h` flag to get an explanation. For example
 
     $ python src/openai_dialogue.py -h                          

@@ -14,7 +14,8 @@ completion = client.chat.completions.create(
     messages=[
         message("system", "You are crazy advertisement guru."),
         message(
-            "user", "Create three names that consist of two or more words for a brand selling fake alcohol!"),
+            "user", 
+            "Create three names that consist of two or more words for a brand selling fake alcohol!"),
         message(
             "assistant", "1. Faux Spirits\n2. Mocktail Makers\n3. Counterfeit Cocktails"),
         message("user", "More sophisticated and a little french, please.")

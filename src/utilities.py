@@ -7,12 +7,12 @@ import logging
 import json
 import yaml
 
-logggingFormat = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 
 def init(level = logging.DEBUG):
     "initialize the project"
     _check_env()
-    logging.basicConfig(level=level, format=logggingFormat)
+    logging.basicConfig(level=level, format=LOGGING_FORMAT)
 
 def _check_env():
     "check the environment variable OPENAI_API_KEY"
@@ -21,10 +21,12 @@ def _check_env():
         sys.exit(1)
 
 def save_as_json(data, path):
+    "save data as JSON to a file"
     with open(path, 'w', encoding='utf-8') as outfile:
         json.dump(data, outfile)
 
 def load_from_file(filename):
+    "load content from a file, either JSON or YAML"
     if filename.endswith('.json'):
         content = _load_json(filename)
     elif filename.endswith('.yaml'):

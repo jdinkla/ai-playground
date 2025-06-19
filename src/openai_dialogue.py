@@ -22,7 +22,7 @@ init(logging.WARNING)
 
 content = load_from_file(args.filename)
 scene = Scene.model_validate(content)
-    
+
 dialogue = Dialogue(scene, OpenAI)
 dialogue.subscribe(stdout_subscriber)
 dialogue.play(args.turns, args.model)
