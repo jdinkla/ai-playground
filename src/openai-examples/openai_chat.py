@@ -2,13 +2,13 @@
 This script is a simple example of how to use the OpenAI API to create a chatbot.
 """
 import logging
-from openai import OpenAI
+import openai as openai_lib
 from utilities import init
 from openai_utilities import MODELS, message
 
 init()
 
-client = OpenAI()
+client = openai_lib.OpenAI()
 completion = client.chat.completions.create(
     model=MODELS[0],
     messages=[

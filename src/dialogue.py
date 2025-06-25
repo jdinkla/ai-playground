@@ -2,7 +2,7 @@
 Dialog generator.
 """
 
-from openai_utilities import create_chat_history, create_message, extended_prompt, get_response, get_role, message
+from openai.openai_utilities import create_chat_history, create_message, extended_prompt, get_response, get_role, message
 
 class Dialogue:
     def __init__(self, scene, clientFactory):

@@ -4,7 +4,7 @@ Simple completion using OpenAI API
 
 import argparse
 import logging
-from openai import OpenAI
+import openai as openai_lib
 from utilities import init
 from openai_utilities import MODELS, message
 
@@ -23,7 +23,7 @@ The user will present you with a story of a crime and you will have to solve it.
 with open(args.filename, 'r', encoding="utf-8") as file:
     content = file.read()
 
-client = OpenAI()
+client = openai_lib.OpenAI()
 response = client.chat.completions.create(
     model=args.model,
     messages=[

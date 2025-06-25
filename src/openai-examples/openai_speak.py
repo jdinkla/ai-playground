@@ -3,7 +3,7 @@ This script uses the OpenAI API to convert text to speech.
 """
 import argparse
 from pathlib import Path
-from openai import OpenAI
+import openai as openai_lib
 from utilities import init
 from audio import play_mp3
 
@@ -28,5 +28,5 @@ parser = argparse.ArgumentParser()
 parser.add_argument("message", help="the message to speak")
 args = parser.parse_args()
 
-_client = OpenAI()
+_client = openai_lib.OpenAI()
 speak(_client, args.message, "nova")

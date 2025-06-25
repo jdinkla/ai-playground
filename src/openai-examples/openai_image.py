@@ -3,7 +3,7 @@ This script generates an image from a prompt using the OpenAI API.
 """
 import argparse
 import logging
-from openai import OpenAI
+import openai as openai_lib
 from utilities import init
 
 init()
@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("prompt", help="the prompt that describes the image")
 args = parser.parse_args()
 
-client = OpenAI()
+client = openai_lib.OpenAI()
 response = client.images.generate(
   model="dall-e-3",
   prompt=args.prompt,

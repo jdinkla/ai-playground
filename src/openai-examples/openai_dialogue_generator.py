@@ -5,7 +5,7 @@ Creates a dialogue from a short description in a json or yaml file.
 import argparse
 import logging
 
-from openai import OpenAI
+import openai as openai_lib
 from openai_utilities import MODELS, message
 from utilities import init
 
@@ -46,7 +46,7 @@ persons:
 The available voices are: alloy, echo, fable, onyx, nova, and shimmer
 """
 
-client = OpenAI()
+client = openai_lib.OpenAI()
 response = client.chat.completions.create(
     model=args.model,
     messages=[

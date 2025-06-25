@@ -5,7 +5,7 @@ Creates a dialogue from a dialogue description in a json or yaml file.
 import argparse
 import logging
 
-from openai import OpenAI
+import openai as openai_lib
 
 from domain import Scene
 from openai_utilities import MODELS
@@ -23,6 +23,6 @@ init(logging.WARNING)
 content = load_from_file(args.filename)
 scene = Scene.model_validate(content)
 
-dialogue = Dialogue(scene, OpenAI)
+dialogue = Dialogue(scene, openai_lib.OpenAI)
 dialogue.subscribe(stdout_subscriber)
 dialogue.play(args.turns, args.model)
