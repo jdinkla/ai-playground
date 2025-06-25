@@ -1,3 +1,4 @@
+set dotenv-load
 
 run := 'PYTHONPATH=src uv run python'
 openai-path := 'src/openai-examples'
@@ -62,3 +63,10 @@ langchain-rag-extended FILENAME QUESTION:
 
 langchain-prompt-text2image DESCRIPTION:
     {{run}} {{langchain-path}}/langchain_prompt_text2image.py "{{DESCRIPTION}}"
+
+#
+# Google ADK
+#
+
+adk-web:
+    cd src ; uv run adk web

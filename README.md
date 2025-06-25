@@ -1,9 +1,18 @@
 # ai-playground
 
-This project contains my examples exploring the APIs of [OpenAI](https://platform.openai.com/playground) 
-and [langchain](https://python.langchain.com/docs/get_started/introduction).
+## Introduction
 
-The `src` folder contains example scripts.
+This project contains my examples exploring the APIs of 
+
+- [OpenAI](https://platform.openai.com/playground) 
+- [langchain](https://python.langchain.com/docs/get_started/introduction)
+- [Google ADK](https://google.github.io/adk-docs/)
+
+The following tools are needed
+- [Just](https://just.systems/man/en/)
+- [uv](https://docs.astral.sh/uv/)
+
+## Running
 
 [Just](https://just.systems/man/en/) allows easy usage. Calling just without arguments shows a list of available commands
 
@@ -106,6 +115,14 @@ With `src/openai_dialogue_generator.py` you can generate dialogue descriptions a
 
 ## Installation
 
-Set the OPENAI-API key.
+Create a `.env` file
+
+```
+GOOGLE_API_KEY=<INSERT-YOUR-KEY-HERE>
+OPENAI_API_KEY=<INSERT-YOUR-KEY-HERE>
+```
+
+or set these on the command line, e.g.
 
     $ export OPENAI_API_KEY="<INSERT-YOUR-KEY-HERE>"
+
