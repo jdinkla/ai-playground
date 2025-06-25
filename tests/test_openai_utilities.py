@@ -1,4 +1,4 @@
-from openai.openai_utilities import message, system_message, create_messages
+from openai_examples.openai_utilities import message, system_message, create_messages
 
 
 def test_message_should_return_message():

@@ -8,7 +8,7 @@ import logging
 import openai as openai_lib
 
 from domain import Scene
-from openai_utilities import MODELS
+from openai_examples.openai_utilities import MODELS
 from utilities import init, load_from_file
 from dialogue import Dialogue, stdout_subscriber
 

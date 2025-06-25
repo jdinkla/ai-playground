@@ -6,7 +6,7 @@ import argparse
 import logging
 import openai as openai_lib
 from utilities import init
-from openai_utilities import MODELS, message
+from openai_examples.openai_utilities import MODELS, message
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="the name of a file with a story")

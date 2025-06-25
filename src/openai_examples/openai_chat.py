@@ -4,7 +4,7 @@ This script is a simple example of how to use the OpenAI API to create a chatbot
 import logging
 import openai as openai_lib
 from utilities import init
-from openai_utilities import MODELS, message
+from openai_examples.openai_utilities import MODELS, message
 
 init()
 

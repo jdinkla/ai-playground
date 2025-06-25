@@ -1,8 +1,8 @@
 set dotenv-load
 
 run := 'PYTHONPATH=src uv run python'
-openai-path := 'src/openai-examples'
-langchain-path := 'src/langchain-examples'
+openai-path := 'src/openai_examples'
+langchain-path := 'src/langchain_examples'
 
 # print this help test
 help:

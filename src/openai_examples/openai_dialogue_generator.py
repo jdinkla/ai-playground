@@ -6,7 +6,7 @@ import argparse
 import logging
 
 import openai as openai_lib
-from openai_utilities import MODELS, message
+from openai_examples.openai_utilities import MODELS, message
 from utilities import init
 
 parser = argparse.ArgumentParser()
