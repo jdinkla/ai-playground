@@ -15,7 +15,9 @@ from dialogue import Dialogue, stdout_subscriber
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="the name of a json file")
 parser.add_argument("turns", help="the number of turns", default=2, type=int)
-parser.add_argument("model", help="the OpenAI model", default=MODELS[0], choices=MODELS, nargs='?')
+parser.add_argument(
+    "model", help="the OpenAI model", default=MODELS[0], choices=MODELS, nargs="?"
+)
 args = parser.parse_args()
 
 init(logging.WARNING)

@@ -1,7 +1,9 @@
 """
 Utilities for sound.
 """
+
 import pygame
+
 
 def play_mp3(path_to_mp3):
     "play an mp3 file"

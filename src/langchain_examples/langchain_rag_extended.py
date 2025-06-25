@@ -13,9 +13,9 @@ parser.add_argument("filename", help="the name of a text file")
 parser.add_argument("question", help="the question to ask")
 args = parser.parse_args()
 
-with open(args.filename, 'r') as file:
+with open(args.filename, "r") as file:
     content = file.read()
-    content_lines = content.split('\n')
+    content_lines = content.split("\n")
 
 vectorstore = DocArrayInMemorySearch.from_texts(
     content_lines,
@@ -34,10 +34,8 @@ prompt = ChatPromptTemplate.from_template(TEMPLATE)
 model = ChatOpenAI()
 output_parser = StrOutputParser()
 
-setup_and_retrieval = RunnableParallel({
-    "context": retriever,
-    "question": RunnablePassthrough()
-}
+setup_and_retrieval = RunnableParallel(
+    {"context": retriever, "question": RunnablePassthrough()}
 )
 chain = setup_and_retrieval | prompt | model | output_parser
 

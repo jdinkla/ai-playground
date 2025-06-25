@@ -1,6 +1,7 @@
 """
 This is an example of how to use the PromptTemplate.
 """
+
 import argparse
 from langchain.prompts import PromptTemplate
 from langchain_openai import OpenAI
@@ -15,10 +16,7 @@ You are an artist and generate a prompt for a text-to-image AI that translates t
 Description: {description}
 """
 
-prompt = PromptTemplate(
-    input_variables=["description"],
-    template=TEMPLATE
-)
+prompt = PromptTemplate(input_variables=["description"], template=TEMPLATE)
 
 chain = LLMChain(llm=OpenAI(temperature=0.5), prompt=prompt)
 
@@ -26,5 +24,5 @@ parser = argparse.ArgumentParser()
 parser.add_argument("description", help="the description of the image")
 args = parser.parse_args()
 
-response=chain.predict(description=args.description)
+response = chain.predict(description=args.description)
 print(response)

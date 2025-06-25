@@ -4,15 +4,12 @@ from openai_examples.openai_utilities import message, system_message, create_mes
 def test_message_should_return_message():
     assert message("someRole", "someContent") == {
         "role": "someRole",
-        "content": "someContent"
+        "content": "someContent",
     }
 
 
 def test_system_message_should_return_message():
-    assert system_message("someContent") == {
-        "role": "system",
-        "content": "someContent"
-    }
+    assert system_message("someContent") == {"role": "system", "content": "someContent"}
 
 
 def test_create_messages_should_return_combined_messages():
@@ -22,5 +19,8 @@ def test_create_messages_should_return_combined_messages():
     history = [user1, user2]
     question = message("user", "someQuestion")
     assert create_messages(prompt, history, question) == [
-        prompt, user1, user2, question
+        prompt,
+        user1,
+        user2,
+        question,
     ]

@@ -7,11 +7,9 @@ import logging
 # see https://platform.openai.com/docs/models/model-endpoint-compatibility
 MODELS = ["gpt-4.1-nano-2025-04-14"]
 
+
 def message(role, content):
-    return {
-        "role": role,
-        "content": content
-    }
+    return {"role": role, "content": content}
 
 
 def system_message(content):
@@ -32,10 +30,7 @@ def create_chat_history(person, prompt, history):
 
 
 def get_response(model, client, chat_history):
-    response = client.chat.completions.create(
-        model=model,
-        messages=chat_history
-    )
+    response = client.chat.completions.create(model=model, messages=chat_history)
     logging.debug(response)
     return response.choices[0].message.content
 

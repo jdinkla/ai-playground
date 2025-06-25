@@ -10,9 +10,13 @@ from openai_examples.openai_utilities import MODELS, message
 from utilities import init
 
 parser = argparse.ArgumentParser()
-parser.add_argument("description",
-    help="the description of the scene of the dialogue including the peoples involved.")
-parser.add_argument("model", help="the OpenAI model", default=MODELS[0], choices=MODELS, nargs='?')
+parser.add_argument(
+    "description",
+    help="the description of the scene of the dialogue including the peoples involved.",
+)
+parser.add_argument(
+    "model", help="the OpenAI model", default=MODELS[0], choices=MODELS, nargs="?"
+)
 args = parser.parse_args()
 
 init(logging.WARNING)
@@ -49,10 +53,7 @@ The available voices are: alloy, echo, fable, onyx, nova, and shimmer
 client = openai_lib.OpenAI()
 response = client.chat.completions.create(
     model=args.model,
-    messages=[
-        message("system", PROMPT),
-        message("user", args.description)
-    ]
+    messages=[message("system", PROMPT), message("user", args.description)],
 )
 logging.debug(response)
 print(response.choices[0].message.content)

@@ -29,7 +29,9 @@ def test_dialogue_should_add_subscriber(mocker):
 
 def test_dialogue_should_play(mocker):
     mock_client = mocker.MagicMock()
-    mock_client.chat.completions.create.return_value.choices[0].message.content = "someResponse"
+    mock_client.chat.completions.create.return_value.choices[
+        0
+    ].message.content = "someResponse"
     dialogue = Dialogue(scene, lambda: mock_client)
     subscriber = mocker.MagicMock()
     dialogue.subscribe(subscriber)
@@ -44,7 +46,9 @@ def test_dialogue_should_play(mocker):
 
 def test_dialogue_should_turn(mocker):
     mock_client = mocker.MagicMock()
-    mock_client.chat.completions.create.return_value.choices[0].message.content = "someResponse"
+    mock_client.chat.completions.create.return_value.choices[
+        0
+    ].message.content = "someResponse"
     dialogue = Dialogue(scene, lambda: mock_client)
     subscriber = mocker.MagicMock()
     dialogue.subscribe(subscriber)
@@ -64,5 +68,5 @@ def test_add_to_histories_should_add(mocker):
     dialogue.add_to_histories("name", "msg")
     assert dialogue.history == {
         "name": [{"role": "user", "content": "msg"}],
-        "secondName": [{"role": "assistant", "content": "msg"}]
+        "secondName": [{"role": "assistant", "content": "msg"}],
     }

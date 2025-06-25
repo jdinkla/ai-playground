@@ -1,6 +1,7 @@
 """
 This script is a simple example of how to use the OpenAI API to create a chatbot.
 """
+
 import logging
 import openai as openai_lib
 from utilities import init
@@ -14,12 +15,14 @@ completion = client.chat.completions.create(
     messages=[
         message("system", "You are crazy advertisement guru."),
         message(
-            "user", 
-            "Create three names that consist of two or more words for a brand selling fake alcohol!"),
+            "user",
+            "Create three names that consist of two or more words for a brand selling fake alcohol!",
+        ),
         message(
-            "assistant", "1. Faux Spirits\n2. Mocktail Makers\n3. Counterfeit Cocktails"),
-        message("user", "More sophisticated and a little french, please.")
-    ]
+            "assistant", "1. Faux Spirits\n2. Mocktail Makers\n3. Counterfeit Cocktails"
+        ),
+        message("user", "More sophisticated and a little french, please."),
+    ],
 )
 
 logging.debug(completion)

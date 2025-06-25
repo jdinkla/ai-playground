@@ -6,7 +6,9 @@ from langchain_core.output_parsers import StrOutputParser
 from utilities import init
 
 parser = argparse.ArgumentParser()
-parser.add_argument("topic", help="the topic of the joke", default="ice cream", nargs='?')
+parser.add_argument(
+    "topic", help="the topic of the joke", default="ice cream", nargs="?"
+)
 args = parser.parse_args()
 
 init(logging.WARNING)

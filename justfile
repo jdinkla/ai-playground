@@ -17,6 +17,9 @@ test:
 lint:
 	uv run pylint src
 
+format:
+	uv run ruff format .
+
 pylintrc:
 	pylint --generate-rcfile > .pylintrc
 
