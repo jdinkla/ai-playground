@@ -70,3 +70,9 @@ langchain-prompt-text2image DESCRIPTION:
 
 adk-web:
     cd src ; uv run adk web
+
+adk-run AGENT:
+    cd src ; uv run adk run {{AGENT}}
+
+google-greeting-agent:
+    @uv run src/google_greeting_agent/runner.py
