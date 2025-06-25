@@ -106,26 +106,6 @@ With `src/openai_dialogue_generator.py` you can generate dialogue descriptions a
 
 ## Installation
 
-Install with
-
-    $ make init
-
 Set the OPENAI-API key.
 
     $ export OPENAI_API_KEY="<INSERT-YOUR-KEY-HERE>"
-    $ source venv/bin/activate
-
-## Issues
-
-### docarray needs old version of pydantic
-
-The examples for RAG use `docarray` and this needs an old version of pydantic (at the time of writing).
-
-    $ pip install pydantic==1.10.9
-    $ python src/langchain_rag.py
-
-Install the new version again with.
-
-    $ pip install -U pydantic
-
-See also the [langchain wiki](https://python.langchain.com/docs/guides/pydantic_compatibility).
