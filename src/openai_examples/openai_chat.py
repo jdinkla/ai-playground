@@ -6,9 +6,11 @@ from openai import OpenAI
 from utilities import init
 from openai_examples.openai_utilities import MODELS, message
 import logging
+
 logging.basicConfig(level=logging.INFO)
 
 init()
+
 
 def get_chat_completion(client: OpenAI) -> str | None:
     """
@@ -24,7 +26,8 @@ def get_chat_completion(client: OpenAI) -> str | None:
                     "Create three names that consist of two or more words for a brand selling fake alcohol!",
                 ),
                 message(
-                    "assistant", "1. Faux Spirits\n2. Mocktail Makers\n3. Counterfeit Cocktails"
+                    "assistant",
+                    "1. Faux Spirits\n2. Mocktail Makers\n3. Counterfeit Cocktails",
                 ),
                 message("user", "More sophisticated and a little french, please."),
             ],
@@ -34,6 +37,7 @@ def get_chat_completion(client: OpenAI) -> str | None:
         print(f"An error occurred: {e}")
         return None
 
+
 def main():
     """
     Run the chat example.
@@ -42,6 +46,6 @@ def main():
     completion = get_chat_completion(client)
     print(completion)
 
+
 if __name__ == "__main__":
     main()
-    

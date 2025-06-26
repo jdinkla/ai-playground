@@ -1,3 +1,7 @@
+"""
+RAG example using LangChain.
+"""
+
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.vectorstores import DocArrayInMemorySearch

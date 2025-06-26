@@ -1,13 +1,13 @@
+# pylint: disable=missing-function-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-module-docstring
 from unittest.mock import MagicMock
 
 from openai_examples import openai_chat
 from openai_examples.openai_utilities import MODELS, message
 
 
-def test_get_chat_completion_success(mocker):
-    """
-    Tests that get_chat_completion returns the message content on a successful API call.
-    """
+def test_get_chat_completion_success():
     # Given
     mock_client = MagicMock()
     mock_response = MagicMock()
@@ -37,10 +37,7 @@ def test_get_chat_completion_success(mocker):
     )
 
 
-def test_get_chat_completion_api_error(mocker):
-    """
-    Tests that get_chat_completion handles an API error gracefully and returns None.
-    """
+def test_get_chat_completion_api_error():
     # Given
     mock_client = MagicMock()
     mock_client.chat.completions.create.side_effect = Exception("API connection failed")

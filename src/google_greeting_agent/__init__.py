@@ -1,1 +1,3 @@
-from . import agent
+"""
+Init for google_greeting_agent package.
+"""

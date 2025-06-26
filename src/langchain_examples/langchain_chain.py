@@ -1,3 +1,7 @@
+"""
+Chain example using LangChain.
+"""
+
 import argparse
 import logging
 from langchain_openai import ChatOpenAI

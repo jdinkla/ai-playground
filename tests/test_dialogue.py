@@ -1,3 +1,6 @@
+# pylint: disable=missing-function-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-module-docstring
 from dialogue import Dialogue
 from domain import Person, Scene
 
@@ -16,7 +19,7 @@ def test_dialogue_should_initialize(mocker):
     assert dialogue.history == {"name": []}
     assert dialogue.clients == {"name": mock_client_factory()}
     assert dialogue.prompts == {"name": "\ndescription\n\nprompt\n"}
-    assert dialogue.subscribers == []
+    assert len(dialogue.subscribers) == 0
 
 
 def test_dialogue_should_add_subscriber(mocker):
@@ -24,7 +27,7 @@ def test_dialogue_should_add_subscriber(mocker):
     dialogue = Dialogue(scene, mock_client_factory)
     dialogue.subscribe(mocker.MagicMock())
 
-    assert dialogue.subscribers.__len__() == 1
+    assert len(dialogue.subscribers) == 1
 
 
 def test_dialogue_should_play(mocker):

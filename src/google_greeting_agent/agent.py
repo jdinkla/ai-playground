@@ -1,3 +1,7 @@
+"""
+Agent for Google Greeting Agent.
+"""
+
 from google.adk.agents import Agent
 
 root_agent = Agent(

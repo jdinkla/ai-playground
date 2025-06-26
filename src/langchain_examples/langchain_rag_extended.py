@@ -1,3 +1,7 @@
+"""
+Extended RAG example using LangChain.
+"""
+
 import argparse
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.prompts import ChatPromptTemplate
@@ -13,7 +17,7 @@ parser.add_argument("filename", help="the name of a text file")
 parser.add_argument("question", help="the question to ask")
 args = parser.parse_args()
 
-with open(args.filename, "r") as file:
+with open(args.filename, "r", encoding="utf-8") as file:
     content = file.read()
     content_lines = content.split("\n")
 
