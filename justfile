@@ -9,73 +9,73 @@ help:
   @just --list
 
 init:
-    uv sync
+    @uv sync
 
 test:
-	PYTHONPATH=src uv run pytest
+	@PYTHONPATH=src uv run pytest
 
 lint:
-	uv run pylint src
+	@uv run pylint src tests
 
 format:
-	uv run ruff format .
+	@uv run ruff format .
 
 pylintrc:
-	pylint --generate-rcfile > .pylintrc
+	@pylint --generate-rcfile > .pylintrc
 
 #
 # OpenAI 
 #
 
 openai-chat:
-    {{run}} {{openai-path}}/openai_chat.py
+    @{{run}} {{openai-path}}/openai_chat.py
     
 openai-detective FILENAME:
-    {{run}} {{openai-path}}/openai_detective.py {{FILENAME}}
+    @{{run}} {{openai-path}}/openai_detective.py {{FILENAME}}
 
 openai-dialogue FILENAME TURNS:
-    {{run}} {{openai-path}}/openai_dialogue.py {{FILENAME}} {{TURNS}}
+    @{{run}} {{openai-path}}/openai_dialogue.py {{FILENAME}} {{TURNS}}
 
 openai-dialogue-generator DESCRIPTION:
-    {{run}} {{openai-path}}/openai_dialogue_generator.py "{{DESCRIPTION}}"
+    @{{run}} {{openai-path}}/openai_dialogue_generator.py "{{DESCRIPTION}}"
 
 openai-image PROMPT:
-    {{run}} {{openai-path}}/openai_image.py "{{PROMPT}}"
+    @{{run}} {{openai-path}}/openai_image.py "{{PROMPT}}"
 
 openai-speak SOMETHING:
-    {{run}} {{openai-path}}/openai_speak.py "{{SOMETHING}}"
+    @{{run}} {{openai-path}}/openai_speak.py "{{SOMETHING}}"
     
 #
 # LangChain
 #
 
 langchain-chain:
-    {{run}} {{langchain-path}}/langchain_chain.py
+    @{{run}} {{langchain-path}}/langchain_chain.py
 
 langchain-conversation:
-    {{run}} {{langchain-path}}/langchain_conversation_chain.py
+    @{{run}} {{langchain-path}}/langchain_conversation_chain.py
 
 langchain-llm:
-    {{run}} {{langchain-path}}/langchain_llm.py
+    @{{run}} {{langchain-path}}/langchain_llm.py
 
 langchain-rag:
-    {{run}} {{langchain-path}}/langchain_rag.py
+    @{{run}} {{langchain-path}}/langchain_rag.py
 
 langchain-rag-extended FILENAME QUESTION:
-    {{run}} {{langchain-path}}/langchain_rag_extended.py "{{FILENAME}}" "{{QUESTION}}"
+    @{{run}} {{langchain-path}}/langchain_rag_extended.py "{{FILENAME}}" "{{QUESTION}}"
 
 langchain-prompt-text2image DESCRIPTION:
-    {{run}} {{langchain-path}}/langchain_prompt_text2image.py "{{DESCRIPTION}}"
+    @{{run}} {{langchain-path}}/langchain_prompt_text2image.py "{{DESCRIPTION}}"
 
 #
 # Google ADK
 #
 
 adk-web:
-    cd src ; uv run adk web
+    @cd src ; uv run adk web
 
 adk-run AGENT:
-    cd src ; uv run adk run {{AGENT}}
+    @cd src ; uv run adk run {{AGENT}}
 
 google-greeting-agent:
     @uv run src/google_greeting_agent/runner.py
