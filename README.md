@@ -7,8 +7,10 @@ This project contains my examples exploring the APIs of
 - [OpenAI](https://platform.openai.com/playground) 
 - [langchain](https://python.langchain.com/docs/get_started/introduction)
 - [Google ADK](https://google.github.io/adk-docs/)
+- [PydanticAI](https://ai.pydantic.dev/)
 
 The following tools are needed
+
 - [Just](https://just.systems/man/en/)
 - [uv](https://docs.astral.sh/uv/)
 
@@ -77,9 +79,9 @@ And this is an example session
     $ python src/openai_dialogue.py examples/modern_romeo_and_juliet.yaml 2 "gpt-4-1106-preview"
     ----------------------------------------------------
     [Romeo] Yo, Jules, peepin' ya still, queen of my world – fly high in them skies.
-    Light it up, my night’s delight; how 'bout we roll, just you and I?
-    Words ain’t enough, babe, gotta show; let's bounce, hit the town, it's our time.
-    Drop a pin, I’ll scoop you fast; together, we'll set this night on fire, make it sublime.
+    Light it up, my night's delight; how 'bout we roll, just you and I?
+    Words ain't enough, babe, gotta show; let's bounce, hit the town, it's our time.
+    Drop a pin, I'll scoop you fast; together, we'll set this night on fire, make it sublime.
 
     ----------------------------------------------------
     [Juliet] Yeah, it's me. What's up?
@@ -125,4 +127,3 @@ OPENAI_API_KEY=<INSERT-YOUR-KEY-HERE>
 or set these on the command line, e.g.
 
     $ export OPENAI_API_KEY="<INSERT-YOUR-KEY-HERE>"
-
