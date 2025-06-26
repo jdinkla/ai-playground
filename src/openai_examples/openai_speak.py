@@ -8,6 +8,11 @@ import openai as openai_lib
 from utilities import init
 from audio import play_mp3
 
+parser = argparse.ArgumentParser()
+parser.add_argument("message", help="the message to speak")
+args = parser.parse_args()
+
+init()
 
 def speak(client, message, voice):
     "Convert text to speech using OpenAI's TTS model and play the audio."
@@ -16,17 +21,5 @@ def speak(client, message, voice):
     response.stream_to_file(speech_file_path)
     play_mp3(speech_file_path)
 
-
-def speak_subscriber(client, person, response):
-    "Speak the response for a specific person."
-    speak(client, response, person.voice)
-
-
-init()
-
-parser = argparse.ArgumentParser()
-parser.add_argument("message", help="the message to speak")
-args = parser.parse_args()
-
-_client = openai_lib.OpenAI()
-speak(_client, args.message, "nova")
+client = openai_lib.OpenAI()
+speak(client, args.message, "nova")
