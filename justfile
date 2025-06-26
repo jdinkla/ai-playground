@@ -79,3 +79,10 @@ adk-run AGENT:
 
 google-greeting-agent:
     @uv run src/google_greeting_agent/runner.py
+
+#
+# Pydantic AI
+#
+
+pydantic-dice-game:
+    @{{run}} src/pydantic_examples/dice_game.py
