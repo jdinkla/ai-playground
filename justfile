@@ -44,7 +44,16 @@ openai-image PROMPT:
 
 openai-speak SOMETHING:
     @{{run}} {{openai-path}}/openai_speak.py "{{SOMETHING}}"
-    
+
+openai-speak2 SOMETHING VOICE:
+    @{{run}} {{openai-path}}/openai_speak.py "{{SOMETHING}}" "{{VOICE}}"
+
+openai-spoken-news URL:
+    @{{run}} {{openai-path}}/openai_spoken_news.py "{{URL}}"
+
+openai-spoken-news-infoq:
+    @{{run}} {{openai-path}}/openai_spoken_news.py "https://feed.infoq.com/news/"
+
 #
 # LangChain
 #
