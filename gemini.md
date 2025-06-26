@@ -2,6 +2,11 @@
 
 This is a Python project designed as a playground for experimenting with various AI APIs. It is well-structured and provides numerous examples for interacting with different services.
 
+## Clean code guidelines
+
+- Code should explain itself. Use comments only if really necessary.
+- In unit tests use only three comments in BDD style: #Given #When #Then
+
 ## Key Technologies & Dependencies
 
 - **AI Libraries:** OpenAI, Langchain, Google ADK
