@@ -10,7 +10,7 @@ from google.genai import types
 
 import logging
 
-logging.basicConfig(level=logging.ERROR)
+logging.basicConfig(level=logging.DEBUG)
 
 APP_NAME = "greeting_agent"
 USER_ID = "user_1"
@@ -26,9 +26,9 @@ async def main():
     )
 
     runner = Runner(
-        agent=root_agent,  # The agent we want to run
-        app_name=APP_NAME,  # Associates runs with our app
-        session_service=session_service,  # Uses our session manager
+        agent=root_agent,
+        app_name=APP_NAME,
+        session_service=session_service,
     )
 
     async def prompt(session: Session, message: str):

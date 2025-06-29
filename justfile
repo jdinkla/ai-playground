@@ -87,7 +87,7 @@ adk-run AGENT:
     @cd src ; uv run adk run {{AGENT}}
 
 google-greeting-agent:
-    @uv run src/google_greeting_agent/runner.py
+    @{{run}} src/google_greeting_agent/runner.py
 
 #
 # Pydantic AI
