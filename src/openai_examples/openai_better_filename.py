@@ -16,6 +16,8 @@ logging.basicConfig(level=logging.INFO)
 
 init()
 
+PROMPT_TEXT = "You are an expert in naming files. Give a short (4–10 words) descriptive filename for this screenshot. Use snake case, do not use whitespace, but underscores '_' if needed."
+
 
 def generate_filename(client, image_path):
     base64_image = encode_image_to_base64(image_path)
@@ -32,7 +34,7 @@ def generate_filename(client, image_path):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You are an expert in naming files. Give a short (4–10 words) descriptive filename for this screenshot. Use snake case, do not use whitespace, but underscores '_' if needed.",
+                        "text": PROMPT_TEXT,
                     },
                     {
                         "type": "image_url",
@@ -47,7 +49,7 @@ def generate_filename(client, image_path):
 
 def main():
     """
-    Run the speech example.
+    Gets a descriptive filename for an image and renames the file.
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("filename", help="the image file")
@@ -55,7 +57,7 @@ def main():
     client = openai_lib.OpenAI()
     new_name = generate_filename(client, args.filename)
     renamed_name = rename_file(Path(args.filename), new_name)
-    print(f"renamed to {renamed_name}")
+    logging.info("Renamed to %s", renamed_name)
 
 
 if __name__ == "__main__":
