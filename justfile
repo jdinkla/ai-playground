@@ -54,6 +54,9 @@ openai-spoken-news URL:
 openai-spoken-news-infoq:
     @{{run}} {{openai-path}}/openai_spoken_news.py "https://feed.infoq.com/news/"
 
+openai-better-filename FILENAME:
+    @{{run}} {{openai-path}}/openai_better_filename.py "{{FILENAME}}"
+
 #
 # LangChain
 #
