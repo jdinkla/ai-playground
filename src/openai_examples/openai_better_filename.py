@@ -4,6 +4,7 @@ finds a descriptive file name.
 """
 
 import argparse
+import mimetypes
 
 import openai as openai_lib
 from openai_examples.openai_utilities import MODELS
@@ -18,6 +19,11 @@ init()
 
 def generate_filename(client, image_path):
     base64_image = encode_image_to_base64(image_path)
+    mime_type, _ = mimetypes.guess_type(image_path)
+    if not mime_type or not mime_type.startswith("image"):
+        logging.warning("Cannot determine image type, defaulting to png.")
+        mime_type = "image/png"
+
     response = client.chat.completions.create(
         model=MODELS[0],
         messages=[
@@ -30,7 +36,7 @@ def generate_filename(client, image_path):
                     },
                     {
                         "type": "image_url",
-                        "image_url": {"url": f"data:image/png;base64,{base64_image}"},
+                        "image_url": {"url": f"data:{mime_type};base64,{base64_image}"},
                     },
                 ],
             }
