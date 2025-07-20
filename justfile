@@ -40,7 +40,10 @@ openai-dialogue-generator DESCRIPTION:
     @{{run}} {{openai-path}}/openai_dialogue_generator.py "{{DESCRIPTION}}"
 
 openai-image PROMPT:
-    @{{run}} {{openai-path}}/openai_image.py "{{PROMPT}}"
+    @{{run}} {{openai-path}}/openai_image.py {{PROMPT}}
+
+openai-news-classifier:
+    @{{run}} {{openai-path}}/openai_news_classifier.py
 
 openai-speak SOMETHING:
     @{{run}} {{openai-path}}/openai_speak.py "{{SOMETHING}}"
